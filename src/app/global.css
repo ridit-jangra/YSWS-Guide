@@ -1,0 +1,256 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+/*
+ * Hack Club theme, ported from https://github.com/hackclub/css (theme.css)
+ * and https://theme.hackclub.com. Scoped so it doesn't clobber fumadocs' UI.
+ */
+
+/* Phantom Sans (from hackclub/css fonts.css) */
+@font-face {
+  font-family: 'Phantom Sans';
+  src:
+    url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Regular.woff') format('woff'),
+    url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Phantom Sans';
+  src:
+    url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Italic.woff') format('woff'),
+    url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Italic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Phantom Sans';
+  src:
+    url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Bold.woff') format('woff'),
+    url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: 'Phantom Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace;
+}
+
+:root {
+  --darker: #121217;
+  --dark: #17171d;
+  --darkless: #252429;
+  --black: #1f2d3d;
+  --steel: #273444;
+  --slate: #3c4858;
+  --muted: #8492a6;
+  --smoke: #e0e6ed;
+  --snow: #f9fafc;
+  --red: #ec3750;
+  --orange: #ff8c37;
+  --yellow: #f1c40f;
+  --green: #33d6a6;
+  --cyan: #5bc0de;
+  --blue: #338eda;
+  --purple: #a633d6;
+
+  --radii-small: 4px;
+  --radii-default: 8px;
+  --radii-extra: 12px;
+  --radii-ultra: 16px;
+  --radii-circle: 99999px;
+  --shadow-small: 0 1px 2px rgba(0, 0, 0, 0.0625), 0 2px 4px rgba(0, 0, 0, 0.0625);
+  --shadow-card: 0 4px 8px rgba(0, 0, 0, 0.125);
+  --shadow-elevated: 0 1px 2px rgba(0, 0, 0, 0.0625), 0 8px 12px rgba(0, 0, 0, 0.125);
+  --letter-spacing-title: -0.009em;
+  --letter-spacing-headline: 0.009em;
+
+  /* map onto fumadocs tokens (light) */
+  --color-fd-background: #ffffff;
+  --color-fd-foreground: var(--black);
+  --color-fd-muted: var(--snow);
+  --color-fd-muted-foreground: var(--muted);
+  --color-fd-popover: #ffffff;
+  --color-fd-popover-foreground: var(--black);
+  --color-fd-card: #ffffff;
+  --color-fd-card-foreground: var(--black);
+  --color-fd-border: var(--smoke);
+  --color-fd-primary: var(--red);
+  --color-fd-primary-foreground: #ffffff;
+  --color-fd-secondary: var(--snow);
+  --color-fd-secondary-foreground: var(--black);
+  --color-fd-accent: rgba(236, 55, 80, 0.08);
+  --color-fd-accent-foreground: var(--red);
+  --color-fd-ring: var(--red);
+}
+
+.dark {
+  --color-fd-background: var(--dark);
+  --color-fd-foreground: var(--snow);
+  --color-fd-muted: var(--darkless);
+  --color-fd-muted-foreground: var(--muted);
+  --color-fd-popover: var(--darkless);
+  --color-fd-popover-foreground: var(--snow);
+  --color-fd-card: var(--darkless);
+  --color-fd-card-foreground: var(--snow);
+  --color-fd-border: var(--steel);
+  --color-fd-primary: var(--red);
+  --color-fd-primary-foreground: #ffffff;
+  --color-fd-secondary: var(--darkless);
+  --color-fd-secondary-foreground: var(--snow);
+  --color-fd-accent: rgba(236, 55, 80, 0.16);
+  --color-fd-accent-foreground: #ff6b7f;
+  --color-fd-ring: var(--red);
+}
+
+.dark #nd-sidebar {
+  --color-fd-muted: var(--steel);
+  --color-fd-secondary: var(--steel);
+}
+
+body {
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- typography (docs content) ---- */
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-weight: bold;
+  line-height: 1.125;
+  letter-spacing: var(--letter-spacing-title);
+}
+
+/* links: red, underlined, wavy on hover */
+.prose a:not([data-card]) {
+  color: var(--red);
+  font-weight: normal;
+  text-decoration: underline;
+  text-underline-position: under;
+}
+.prose a:not([data-card]):hover,
+.prose a:not([data-card]):focus {
+  text-decoration-style: wavy;
+  text-decoration-skip-ink: none;
+}
+
+/* inline code: blue on sunken, like theme.hackclub.com */
+.prose :not(pre) > code {
+  color: var(--blue);
+  background: var(--smoke);
+  border: 0;
+  border-radius: var(--radii-small);
+}
+.dark .prose :not(pre) > code {
+  background: var(--steel);
+}
+
+/* code blocks */
+.prose figure,
+.prose pre {
+  border-radius: var(--radii-default);
+}
+
+/* tables */
+.prose table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.prose th {
+  border-bottom: 2px solid var(--smoke);
+}
+.dark .prose th {
+  border-bottom-color: var(--steel);
+}
+
+/* ---- components ---- */
+
+/* .card: elevated and rounded, no movement on hover */
+[data-card] {
+  border: 0;
+  border-radius: var(--radii-extra);
+  background: var(--color-fd-card);
+  box-shadow: var(--shadow-card);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.125s ease-in-out;
+}
+a[data-card]:hover,
+a[data-card]:focus {
+  background: var(--color-fd-muted);
+}
+
+/* .cta / pill buttons */
+.hc-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: var(--radii-circle);
+  font-weight: bold;
+  letter-spacing: var(--letter-spacing-headline);
+  color: #fff;
+  background: var(--red);
+  box-shadow: var(--shadow-card);
+  text-decoration: none;
+  transition: background-color 0.125s ease-in-out;
+}
+.hc-button:hover,
+.hc-button:focus {
+  background-color: color-mix(in srgb, var(--red) 85%, black);
+}
+.hc-button.lg {
+  font-size: 20px;
+  line-height: 1;
+  padding: 16px 32px;
+}
+.hc-button.cta {
+  background-image: radial-gradient(ellipse farthest-corner at top left, var(--orange), var(--red));
+}
+.hc-button.outline,
+.hc-button.outline:hover,
+.hc-button.outline:focus {
+  background: none;
+  color: var(--red);
+  border: 2px solid currentcolor;
+  box-shadow: none;
+}
+
+/* .pill and .outline-badge */
+.hc-pill {
+  border-radius: var(--radii-circle);
+  padding: 4px 16px;
+  background: var(--red);
+  color: #fff;
+  font-weight: bold;
+}
+.hc-eyebrow {
+  color: var(--muted);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-headline);
+}
+
+/* callouts get the Hack Club radius too */
+[role='alert'],
+.prose [data-callout] {
+  border-radius: var(--radii-extra);
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html > body[data-scroll-locked] {
+  margin-right: 0px !important;
+  --removed-body-scroll-bar-size: 0px !important;
+}
