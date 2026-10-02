@@ -1,14 +1,13 @@
 import { createGetUrl } from 'fumadocs-core/source';
 
-export const appName = 'YSWS Guide';
+export const appName = 'YSWS Handbook';
 export const docsRoute = '/docs';
 export const docsImageRoute = '/og/docs';
 export const docsContentRoute = '/llms.mdx/docs';
 
-// fill this with your actual GitHub info, for example:
 export const gitConfig = {
   user: 'ridit-jangra',
-  repo: 'YSWS-Guide',
+  repo: 'YSWS-Handbook',
   branch: 'main',
 };
 
